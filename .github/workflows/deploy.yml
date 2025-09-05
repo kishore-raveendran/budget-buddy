@@ -53,5 +53,5 @@ jobs:
           script: |
             cd /home/ubuntu/sms-forwarder
             docker pull rkishorekumar/budgetbuddy:latest
-            docker-compose -f docker-compose-sms.yaml down
-            docker-compose -f docker-compose-sms.yaml up -d --build
+            docker-compose -f docker-compose-sms.yml down
+            docker-compose -f docker-compose-sms.yml up -d --build
