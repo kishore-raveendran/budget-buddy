@@ -14,6 +14,7 @@ public class TransactionService {
 
         Pattern amountPattern = Pattern.compile("(?i)(?:Rs|INR)\\s?([0-9]+(?:\\.[0-9]{1,2})?)");
         Matcher m = amountPattern.matcher(sms.getContent());
+
         if (m.find()) {
             sms.setAmount(Double.valueOf(m.group(1)));
         }
