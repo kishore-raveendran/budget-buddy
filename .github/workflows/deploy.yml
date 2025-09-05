@@ -1,0 +1,46 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Setup Docker Buildx (needed for multi-platform builds)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Step 3: Login to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}  # rkishorekumar
+          password: ${{ secrets.DOCKER_PASSWORD }}  # Docker Hub token
+
+      # Step 4: Build and push Docker image
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: rkishorekumar/budgetbuddy:latest
+
+      # Optional Step 5: Deploy to EC2 (requires SSH secrets setup)
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.EC2_HOST }}      # EC2 public IP
+          username: ${{ secrets.EC2_USER }}  # usually 'ubuntu'
+          key: ${{ secrets.EC2_KEY }}        # your private key
+          script: |
+            cd /home/ubuntu/sms-forwarder
+            docker pull rkishorekumar/budgetbuddy:latest
+            docker-compose -f docker-compose-sms.yml up -d --build
+
