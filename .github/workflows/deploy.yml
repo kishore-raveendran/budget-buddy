@@ -14,25 +14,36 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Setup Docker Buildx (needed for multi-platform builds)
+      # Step 2: Set up JDK (needed for Maven build)
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      # Step 3: Build jar using Maven
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
+      # Step 4: Setup Docker Buildx (needed for multi-platform builds)
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # Step 3: Login to Docker Hub
+      # Step 5: Login to Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}  # rkishorekumar
           password: ${{ secrets.DOCKER_PASSWORD }}  # Docker Hub token
 
-      # Step 4: Build and push Docker image
+      # Step 6: Build and push Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           push: true
           tags: rkishorekumar/budgetbuddy:latest
 
-      # Optional Step 5: Deploy to EC2 (requires SSH secrets setup)
+      # Step 7: Deploy to EC2 (requires SSH secrets setup)
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -42,5 +53,5 @@ jobs:
           script: |
             cd /home/ubuntu/sms-forwarder
             docker pull rkishorekumar/budgetbuddy:latest
-            docker-compose -f docker-compose-sms.yml up -d --build
-
+            docker-compose -f docker-compose-sms.yaml down
+            docker-compose -f docker-compose-sms.yaml up -d --build
