@@ -1,5 +1,15 @@
 /Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/BudgetBuddyApplication.java
+/Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/config/JwtAuthenticationFilter.java
+/Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/config/JwtUtil.java
+/Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/config/SecurityConfig.java
+/Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/controller/AuthController.java
 /Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/controller/TransactionController.java
+/Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/dto/JwtResponse.java
+/Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/dto/LoginRequest.java
+/Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/dto/RegisterRequest.java
 /Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/entity/TransactionMessage.java
+/Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/entity/User.java
 /Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/repository/TransactionRepository.java
+/Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/repository/UserRepository.java
+/Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/service/CustomUserDetailsService.java
 /Users/kishorekumar/Documents/budget-buddy/budget-buddy/src/main/java/com/finance/saas/service/TransactionService.java

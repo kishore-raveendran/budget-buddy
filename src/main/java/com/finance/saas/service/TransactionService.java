@@ -20,7 +20,7 @@ public class TransactionService {
         }
 
         String text = sms.getContent().toLowerCase();
-        if (text.contains("swiggy") || text.contains("zomato")) {
+        if (text.contains("swiggy") || text.contains("zomato") || text.contains("blinkit")) {
             sms.setCategory("FOOD");
         } else if (text.contains("amazon") || text.contains("flipkart")) {
             sms.setCategory("SHOPPING");
