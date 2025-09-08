@@ -10,11 +10,6 @@ services:
 
   app:
     image: rkishorekumar/budgetbuddy:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
-      platforms:
-        - linux/arm64  # for local Apple Silicon build
     ports:
       - "7766:7766"
     depends_on:
