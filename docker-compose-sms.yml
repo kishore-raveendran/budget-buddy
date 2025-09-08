@@ -10,7 +10,7 @@ services:
       - "5433:5432"
 
   app:
-    build: .
+    image: rkishorekumar/budgetbuddy:latest
     ports:
       - "7766:7766"
     depends_on:
