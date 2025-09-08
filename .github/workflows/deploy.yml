@@ -42,8 +42,22 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
+            # Create budget-buddy directory if it doesn't exist
+            mkdir -p /home/ubuntu/budget-buddy
+            
+            # Stop old services if they exist
+            if [ -d "/home/ubuntu/sms-forwarder" ]; then
+              cd /home/ubuntu/sms-forwarder
+              docker-compose -f docker-compose-sms.yml down || true
+            fi
+            
+            # Switch to budget-buddy directory
             cd /home/ubuntu/budget-buddy
-            docker-compose -f docker-compose-budget-buddy.yml down
+            
+            # Download the new docker-compose file
+            curl -o docker-compose-budget-buddy.yml https://raw.githubusercontent.com/rkishorekumar/budget-buddy/main/docker-compose-budget-buddy.yml
+            
+            # Pull and start services
             docker image rm rkishorekumar/budgetbuddy:latest || true
             docker pull rkishorekumar/budgetbuddy:latest
             docker-compose -f docker-compose-budget-buddy.yml up -d
