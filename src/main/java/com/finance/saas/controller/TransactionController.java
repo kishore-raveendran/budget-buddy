@@ -46,4 +46,9 @@ public class TransactionController {
         return expensesByCategory;
     }
 
+    @GetMapping("/test")
+    public String getMethodName() {
+        return "Hello";
+    }
+
 }
