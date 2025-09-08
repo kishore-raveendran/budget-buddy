@@ -7,5 +7,5 @@ RUN mvn clean package -DskipTests
 # Run stage
 FROM eclipse-temurin:21-jdk-alpine
 WORKDIR /app
-COPY --from=builder /app/target/sms-forwarder.jar sms-forwarder.jar
-ENTRYPOINT ["java","-jar","sms-forwarder.jar"]
+COPY --from=builder /app/target/budget-buddy.jar budget-buddy.jar
+ENTRYPOINT ["java","-jar","budget-buddy.jar"]

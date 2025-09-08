@@ -42,8 +42,8 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            cd /home/ubuntu/sms-forwarder
-            docker-compose -f docker-compose-sms.yml down
+            cd /home/ubuntu/budget-buddy
+            docker-compose -f docker-compose-budget-buddy.yml down
             docker image rm rkishorekumar/budgetbuddy:latest || true
             docker pull rkishorekumar/budgetbuddy:latest
-            docker-compose -f docker-compose-sms.yml up -d
+            docker-compose -f docker-compose-budget-buddy.yml up -d
