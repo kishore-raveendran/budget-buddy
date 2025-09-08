@@ -47,8 +47,29 @@ jobs:
             mkdir -p /home/ubuntu/budget-buddy
             cd /home/ubuntu/budget-buddy
 
-            # Download latest docker-compose file
-            curl -o docker-compose-budget-buddy.yml https://raw.githubusercontent.com/rkishorekumar/budget-buddy/main/docker-compose-budget-buddy.yml
+            # Create docker-compose file
+            cat > docker-compose-budget-buddy.yml << 'EOF'
+            services:
+              db:
+                image: postgres:17
+                environment:
+                  POSTGRES_DB: budgetbuddy
+                  POSTGRES_USER: postgres
+                  POSTGRES_PASSWORD: mysecretpassword
+                ports:
+                  - "5433:5432"
+            
+              app:
+                image: rkishorekumar/budgetbuddy:latest
+                ports:
+                  - "7766:7766"
+                depends_on:
+                  - db
+                environment:
+                  SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/budgetbuddy
+                  SPRING_DATASOURCE_USERNAME: postgres
+                  SPRING_DATASOURCE_PASSWORD: mysecretpassword
+            EOF
 
             # Pull and restart services
             docker-compose -f docker-compose-budget-buddy.yml down || true
