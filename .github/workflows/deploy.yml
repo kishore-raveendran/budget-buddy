@@ -52,6 +52,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}        # your private key
           script: |
             cd /home/ubuntu/sms-forwarder
-            docker pull rkishorekumar/budgetbuddy:latest
             docker-compose -f docker-compose-sms.yml down
-            docker-compose -f docker-compose-sms.yml up -d --build
+            docker image rm rkishorekumar/budgetbuddy:latest || true
+            docker pull rkishorekumar/budgetbuddy:latest
+            docker-compose -f docker-compose-sms.yml up -d
