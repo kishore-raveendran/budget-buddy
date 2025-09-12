@@ -71,4 +71,9 @@ public class TransactionController {
         return ResponseEntity.ok(count);
     }
 
+    @GetMapping("/test")
+    public String getMethodName() {
+        return "HEllo World";
+    }
+
 }
